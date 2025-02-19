@@ -1,3 +1,24 @@
+config:
+  # general:
+  #   path: /metrics
+  auth:
+    # Basic Auth
+    username: scraparr
+    password: s3cr3t1Gu3ss
+  #   Bearer Token
+  #   token: PmFq6o0rm4cT1YJBVbheyEUE0Rrs0OvYm4VbJaiO963FRzBdmqk43YkbeAfWOuUk
+  # sonarr:
+  #   - url: http://sonarr.media.cluster.local:8989
+  #     api_key: key123
+  #     alias: sonarr
+  # radarr:
+  #   - url: http://radarr.media.cluster.local:7878
+  #     api_key: key123
+  #     alias: radarr
+  # prowlarr:
+  #   - url: http://prowlarr.media.cluster.local:9696
+  #     api_key: key123
+  #     alias: prowlarr
 
 replicaCount: 1
 
