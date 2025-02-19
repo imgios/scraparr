@@ -14,11 +14,17 @@ Please note we have a code of conduct, please follow it in all your interactions
 | Hotfix | `hotfix/hotfix-name` | Always branch off Stable |
 
 ## Conventional Commits
+
 As a general rule, your commit message should start with a single line that's no more than about 50 characters and that describes the commit concisely. If you feel the need for more detailed explanations, create a blank line, followed by a more detailed explanation.
 
 The [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/) is a lightweight convention on top of commit messages. It provides an easy set of rules for creating an explicit commit history.
 
-You're not obliged to use the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/), but it's important to have a clear commit message.
+You're not obliged to use the [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/), but it's important to have a clear commit message. In this case, for consistency, try and use the imperative present tense when creating a message. Examples:
+
+- Use "Add tests for" instead of "I added tests for"
+- Use "Change x to y" instead of "Changed x to y"
+
+More info [here](https://gist.github.com/digitaljhelms/3761873).
 
 ## Merge Request Process
 
