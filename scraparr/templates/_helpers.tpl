@@ -49,3 +49,14 @@ Selector labels
 app.kubernetes.io/name: {{ include "scraparr.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Scraparr metrics endpoint
+*/}}
+{{- define "scraparr.endpoint" -}}
+{{- if and .Values.config .Values.config.general .Values.config.general.path }}
+{{- .Values.config.general.path }}
+{{- else }}
+{{- printf "/metrics" }}
+{{- end }}
+{{- end }}

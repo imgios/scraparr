@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "scraparr.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "scraparr.fullname" . }}:{{ .Values.service.port }}{{ include "scraparr.endpoint" . }}']
   restartPolicy: Never
