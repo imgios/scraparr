@@ -9,6 +9,6 @@ keywords:
 home: https://github.com/imgios/scraparr
 sources:
   - https://github.com/imgios/scraparr
-maintainers: # (optional)
+maintainers:
   - name: Giosuè Sulipano
     url: https://giosuesulipano.it/
