@@ -1,5 +1,5 @@
 apiVersion: v2
-name: Scraparr
+name: scraparr
 description: Scraparr is a Prometheus Exporter for various components of the *arr Suite
 type: application
 version: 0.1.0
