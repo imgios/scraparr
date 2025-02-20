@@ -28,6 +28,9 @@ $ helm install <release-name> imgios/scraparr \
 
 <sup>Note: if you want to deploy a specific version, execute the previous command adding: <code>--version x.y.z</code></sup>
 
+> [!NOTE]  
+> Please read [Helm Chart README.md](https://github.com/imgios/scraparr/blob/main/scraparr/README.md) for details on how to configure the values needed for this chart.
+
 🚀 You're ready to use it!
 
 Check out [thecfu/scraparr](https://github.com/thecfu/scraparr/tree/main/dashboards) for sample Grafana dashboards.
