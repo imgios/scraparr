@@ -90,7 +90,7 @@ ingress:
   # -- (string) Ingress host(s) to be configured.
   # @section -- Chart Configuration
   hosts:
-    - host: chart-example.local
+    - host: scraparr.metrics.local
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -99,7 +99,7 @@ ingress:
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
-  #      - chart-example.local
+  #      - scraparr.metrics.local
 # @ignore
 resources: {}
   # limits:
