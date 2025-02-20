@@ -1,0 +1,24 @@
+apiVersion: v2
+name: scraparr
+description: Scraparr is a Prometheus Exporter for various components of the *arr Suite
+type: application
+version: 1.0.0
+appVersion: "2.0.1"
+keywords:
+  - arr
+  - metrics
+  - prometheus
+  - scraparr
+  - prowlarr
+  - radarr
+  - sonarr
+  - jellyseerr
+  - jellyfin
+  - flaresolverr
+home: https://github.com/imgios/scraparr
+sources:
+  - https://github.com/imgios/scraparr
+  - https://github.com/thecfu/scraparr
+maintainers:
+  - name: Giosuè Sulipano
+    url: https://giosuesulipano.it/

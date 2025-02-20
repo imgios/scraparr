@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scraparr-config
+data:
+  config.yaml: |-
+  {{- .Values.config | toYaml | nindent 4 }}
