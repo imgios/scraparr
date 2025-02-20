@@ -90,6 +90,7 @@ ingress:
   # -- (string) Ingress host(s) to be configured.
   # @section -- Chart Configuration
   hosts:
+    # @ignore
     - host: scraparr.metrics.local
       paths:
         - path: /
