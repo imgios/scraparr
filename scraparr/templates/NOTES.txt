@@ -2,7 +2,7 @@ Reach out Scraparr by running these commands:
 {{- if .Values.ingress.enabled }}
 {{- range $host := .Values.ingress.hosts }}
   {{- range .paths }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}{{ include "scraparr.endpoint" . }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}{{ include "scraparr.endpoint" $ }}
   {{- end }}
 {{- end }}
 {{- else if contains "NodePort" .Values.service.type }}
