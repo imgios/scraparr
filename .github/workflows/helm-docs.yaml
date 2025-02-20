@@ -27,5 +27,5 @@ jobs:
         git-push: true
         git-push-user-name: "🤖 imgios helper"
         git-push-user-email: "scraparr-bot@giosuesulipano.it"
-        git-commit-message: docs(chart): generate helm chart documentation
+        git-commit-message: "docs(chart): generate helm chart documentation"
         chart-search-root: ./scraparr
