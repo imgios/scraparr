@@ -45,7 +45,7 @@ Scraparr is a Prometheus Exporter for various components of the *arr Suite
 | ingress.annotations | string | `{}` | Ingress annotations, e.g., "kubernetes.io/ingress.class: nginx" |
 | ingress.className | string | `""` | Ingress class name, e.g., "nginx" |
 | ingress.enabled | string | false | Enable scraparr ingress to reach it out via FQDN. This may be necessary in some circumstances. |
-| ingress.hosts | string | `[]` | Ingress host(s) to be configured. |
+| ingress.hosts | list | {"host": "scraparr.metrics.local","paths": [{"path": "/","pathType": "ImplementationSpecific"}]} | Ingress host(s) to be configured. |
 | ingress.tls | string | `[]` | Ingress certificates for secure protocols (e.g., HTTPS) |
 | replicaCount | string | 1 | This is the number of Scraparr deployment replicas. |
 
