@@ -6,40 +6,46 @@ config:
   #   path: /metrics
   auth:
     # -- (string) Insert the Scraparr username to be configured if opt for the basic authentication.
-    # @default -- scraparr
+    # @default -- `scraparr`
     # @section -- Scraparr Configuration
     username: scraparr
     # -- (string) Insert the Scraparr password to be configured if opt for the basic authentication.
-    # @default -- s3cr3t1Gu3ss
+    # @default -- `s3cr3t1Gu3ss`
     # @section -- Scraparr Configuration
     password: s3cr3t1Gu3ss
   # Bearer Token
   # token: PmFq6o0rm4cT1YJBVbheyEUE0Rrs0OvYm4VbJaiO963FRzBdmqk43YkbeAfWOuUk
-  # sonarr:
+  # -- (list) This is the sonarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one sonarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  sonarr: {}
   #   - url: http://sonarr.media.cluster.local:8989
   #     api_key: key123
   #     alias: sonarr
-  # radarr:
+  # -- (list) This is the radarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one radarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  radarr: {}
   #   - url: http://radarr.media.cluster.local:7878
   #     api_key: key123
   #     alias: radarr
-  # prowlarr:
+  # -- (list) This is the prowlarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one prowlarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  prowlarr: {}
   #   - url: http://prowlarr.media.cluster.local:9696
   #     api_key: key123
   #     alias: prowlarr
 
 # -- (string) This is the number of Scraparr deployment replicas.
-# @default -- 1
+# @default -- `1`
 # @section -- Chart Configuration
 replicaCount: 1
 
 image:
   # -- (string) Scraparr container repository to fetch the image.
-  # @default -- ghcr.io/thecfu/scraparr
+  # @default -- `ghcr.io/thecfu/scraparr`
   # @section -- Chart Configuration
   repository: ghcr.io/thecfu/scraparr
   # -- (string) Scraparr container image pull policy.
-  # @default -- IfNotPresent
+  # @default -- `IfNotPresent`
   # @section -- Chart Configuration
   pullPolicy: IfNotPresent
   # -- (string) Scraparr container image tag. This parameter overrides the image tag whose default is the chart appVersion.
@@ -76,7 +82,7 @@ service:
 
 ingress:
   # -- (string) Enable scraparr ingress to reach it out via FQDN. This may be necessary in some circumstances.
-  # @default -- false
+  # @default -- `false`
   # @section -- Chart Configuration
   enabled: false
   # -- (string) Ingress class name, e.g., "nginx"
@@ -88,7 +94,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   # -- (list) Ingress host(s) to be configured.
-  # @default -- {"host": "scraparr.metrics.local","paths": [{"path": "/","pathType": "ImplementationSpecific"}]}
+  # @default -- `{"host": "scraparr.metrics.local","paths": [{"path": "/","pathType": "ImplementationSpecific"}]}`
   # @section -- Chart Configuration
   hosts:
     # @ignore
@@ -141,6 +147,8 @@ volumeMounts: []
 #   mountPath: "/etc/foo"
 #   readOnly: true
 
+# -- (string) This parameter is useful to deploy Scraparr only on a given set of nodes.
+# @section -- Chart Configuration
 nodeSelector: {}
 # @ignore
 tolerations: []
