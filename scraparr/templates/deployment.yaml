@@ -29,6 +29,23 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if and .Values.config (or (hasKey .Values.config "radarr") (hasKey .Values.config "sonarr") (hasKey .Values.config "prowlarr")) }}
+      initContainers:
+      {{- range $key, $values := $.Values.config }}
+      {{- if regexMatch "radarr|sonarr|prowlarr$" $key }}
+      {{- $arrInfo := get $.Values.config $key }}
+      {{- range $service := $values }}
+        - name: wait-for-{{ $service.alias }}
+          image: rapidfort/curl:8.12.1
+          command: [
+            "sh",
+            "-c",
+            "until curl \"{{ $service.url }}\" ; do echo Waiting for {{ $service.alias }} ; sleep 10 ; done"
+          ]
+      {{- end }}
+      {{- end }}
+      {{- end }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
