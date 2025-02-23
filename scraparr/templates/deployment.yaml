@@ -29,7 +29,7 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if and .Values.config (or (hasKey .Values.config "radarr") (hasKey .Values.config "sonarr") (hasKey .Values.config "prowlarr")) }}
+      {{- if and .Values.config (or .Values.config.radarr .Values.config.sonarr .Values.config.prowlarr) }}
       initContainers:
       {{- range $key, $values := $.Values.config }}
       {{- if regexMatch "radarr|sonarr|prowlarr$" $key }}
