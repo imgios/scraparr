@@ -36,11 +36,11 @@ spec:
       {{- $arrInfo := get $.Values.config $key }}
       {{- range $service := $values }}
         - name: wait-for-{{ $service.alias }}
-          image: rapidfort/curl:8.12.1
+          image: busybox:1.37.0
           command: [
             "sh",
             "-c",
-            "until curl \"{{ $service.url }}\" ; do echo Waiting for {{ $service.alias }} ; sleep 10 ; done"
+            "for i in $(seq 120); do if (wget --spider -S -T 10 \"{{ $service.url }}\" 2>&1 | grep -qw '200\|301\|302' > /dev/null) ; then exit 0; fi; echo [$i] Waiting for {{ $service.alias }}; sleep 10; done; echo Timed out waiting for {{ $service.alias }}; exit 1"
           ]
       {{- end }}
       {{- end }}
