@@ -1,7 +1,7 @@
 name: Suggest an automatic update to the latest version of the Scraparr app
 on:
-  # schedule:
-  #   - cron: "0 18 * * *" # After office hours 😊
+  schedule:
+    - cron: "0 18 * * *"
   workflow_dispatch:
 
 permissions:
@@ -52,6 +52,14 @@ jobs:
           fi
           git checkout -B bump/scraparr-$LATEST_APP_SEMVER
           sed -i "s/^appVersion:.*/appVersion: \"$LATEST_APP_SEMVER\"/" servarr/Chart.yaml
+          CHART_VERSION=$(yq '.version' servarr/Chart.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          NEW_CHART_VERSION=$(echo $CHART_VERSION | awk -F "." '{print $1 "." $2 "." $3+1}')
+          if [[ !  "$NEW_CHART_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]] ; then
+            echo "ERROR: New Chart version is not matching the semver regex ^[0-9]+\.[0-9]+\.[0-9]+"
+            echo "DEBUG: $NEW_CHART_VERSION"
+            exit 1
+          fi
+          sed -i "s/^version:.*/version: $NEW_CHART_VERSION/" servarr/Chart.yaml
           git add servarr/Chart.yaml
           message="build(chart): bump scraparr app to $LATEST_APP_SEMVER"
           git commit -m "$message" -m 'Co-authored-by: imgios <34242779+imgios@users.noreply.github.com>' || EXIT_CODE=$?
