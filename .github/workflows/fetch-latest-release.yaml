@@ -40,7 +40,7 @@ jobs:
             echo "DEBUG: latest: $LATEST_APP_VERSION - semver: $LATEST_APP_SEMVER"
             exit 1
           fi
-          CHART_APP_VERSION=$(yq '.appVersion' servarr/Chart.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          CHART_APP_VERSION=$(yq '.appVersion' scraparr/Chart.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
           if [[ -z "$CHART_APP_VERSION" || ! "$CHART_APP_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]] ; then
             echo "ERROR: Unable to extract the Chart app version!"
             echo "DEBUG: $CHART_APP_VERSION"
@@ -51,16 +51,16 @@ jobs:
             exit 0
           fi
           git checkout -B bump/scraparr-$LATEST_APP_SEMVER
-          sed -i "s/^appVersion:.*/appVersion: \"$LATEST_APP_SEMVER\"/" servarr/Chart.yaml
-          CHART_VERSION=$(yq '.version' servarr/Chart.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          sed -i "s/^appVersion:.*/appVersion: \"$LATEST_APP_SEMVER\"/" scraparr/Chart.yaml
+          CHART_VERSION=$(yq '.version' scraparr/Chart.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
           NEW_CHART_VERSION=$(echo $CHART_VERSION | awk -F "." '{print $1 "." $2 "." $3+1}')
           if [[ !  "$NEW_CHART_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]] ; then
             echo "ERROR: New Chart version is not matching the semver regex ^[0-9]+\.[0-9]+\.[0-9]+"
             echo "DEBUG: $NEW_CHART_VERSION"
             exit 1
           fi
-          sed -i "s/^version:.*/version: $NEW_CHART_VERSION/" servarr/Chart.yaml
-          git add servarr/Chart.yaml
+          sed -i "s/^version:.*/version: $NEW_CHART_VERSION/" scraparr/Chart.yaml
+          git add scraparr/Chart.yaml
           message="build(chart): bump scraparr app to $LATEST_APP_SEMVER"
           git commit -m "$message" -m 'Co-authored-by: imgios <34242779+imgios@users.noreply.github.com>' || EXIT_CODE=$?
           if [[ "$EXIT_CODE" -ne 0 ]] ; then
