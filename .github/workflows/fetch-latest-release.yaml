@@ -115,6 +115,6 @@ jobs:
           #### Other information:
           <!-- empty line -->
           <!-- empty line -->
-          None
+          [thecfu/scraparr-${APP_VERSION} Release Notes](https://github.com/thecfu/scraparr/releases/tag/v${APP_VERSION})
           EOF
           gh pr create -B main -H $BRANCH --title "$title" --body-file pr-body --assignee imgios --label bump --reviewer imgios
