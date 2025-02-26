@@ -1,0 +1,112 @@
+name: Suggest an automatic update to the latest version of the Scraparr app
+on:
+  schedule:
+    - cron: "0 18 * * *" # After office hours 😊
+  workflow_dispatch:
+
+permissions:
+  # Give the default GITHUB_TOKEN write permission to commit and push the
+  # added or changed files to the repository.
+  contents: write
+
+jobs:
+  fetch-latest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout to current commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+      - name: Configure helper Git identity
+        run: |
+          git config user.name "🤖 imgios helper"
+          git config user.email "scraparr-bot@giosuesulipano.it"
+      - name: Fetch latest app release
+        id: app-version
+        run: |
+          LATEST_APP_VERSION=$(curl -sL https://api.github.com/repos/thecfu/scraparr/releases/latest | jq -r ".tag_name")
+          # if [[ -z "$LATEST_APP_VERSION" || "$LATEST_APP_VERSION" == "null" ]]; then
+          #   echo "ERROR: Latest app version is null or empty!"
+          #   echo "DEBUG: $LATEST_APP_VERSION"
+          #   exit 1
+          # fi
+          LATEST_APP_SEMVER=$(echo ${LATEST_APP_VERSION} | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          if [[ -z "$LATEST_APP_SEMVER" || ! "$LATEST_APP_SEMVER" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]] ; then
+            echo "ERROR: Unable to extract the semver from the latest tag!"
+            echo "DEBUG: latest: $LATEST_APP_VERSION - semver: $LATEST_APP_SEMVER"
+            exit 1
+          fi
+          CHART_APP_VERSION=$(yq '.appVersion' servarr/Chart.yaml | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+          if [[ -z "$CHART_APP_VERSION" || ! "$CHART_APP_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]] ; then
+            echo "ERROR: Unable to extract the Chart app version!"
+            echo "DEBUG: $CHART_APP_VERSION"
+            exit 1
+          fi
+          if [[ "$CHART_APP_VERSION" == "$LATEST_APP_SEMVER" ]] ; then
+            echo -e "Already using the latest version \U2705"
+            exit 0
+          fi
+          git checkout -B bump/scraparr-$LATEST_APP_SEMVER
+          sed -i "s/^appVersion:.*/appVersion: \"$LATEST_APP_SEMVER\"/" servarr/Chart.yaml
+          git add servarr/Chart.yaml
+          message="build(chart): bump scraparr app to $LATEST_APP_SEMVER"
+          git commit -m "$message" -m 'Co-authored-by: imgios <34242779+imgios@users.noreply.github.com>' || EXIT_CODE=$?
+          if [[ "$EXIT_CODE" -ne 0 ]] ; then
+            echo "INFO: No changes to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git push --set-upstream origin bump/scraparr-$LATEST_APP_SEMVER
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          echo "branch=bump/scraparr-$LATEST_APP_SEMVER" >> "$GITHUB_OUTPUT"
+          echo "app-version=$LATEST_APP_SEMVER" >> "$GITHUB_OUTPUT"
+          echo "chart-version=$CHART_APP_VERSION" >> "$GITHUB_OUTPUT"
+      - name: Open a Pull Request
+        if: steps.app-version.outputs.changed == 'true'
+        env:
+          BRANCH: ${{ steps.app-version.outputs.branch }}
+          APP_VERSION: ${{ steps.app-version.outputs.app-version }}
+          CHART_VERSION: ${{ steps.app-version.outputs.chart-version }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          title="Bump scraparr app version to ${APP_VERSION}"
+          cat > pr-body << EOF
+          #### Please check if the PR fulfills these requirements
+          <!-- empty line -->
+          - [x] The branch naming convention follows our guidelines
+          - [x] Docs have been added / updated (for bug fixes / features)
+          <!-- empty line -->
+          #### What kind of change does this PR introduce? (Bug fix, feature, docs update, ...)
+          <!-- empty line -->
+          <!-- empty line -->
+          Scraparr app version bump
+          <!-- empty line -->
+          <!-- empty line -->
+          #### What is the current behavior? (You can also link to an open issue here)
+          <!-- empty line -->
+          <!-- empty line -->
+          Scraparr ${CHART_VERSION} Helm Chart is not using the latest app version.
+          <!-- empty line -->
+          <!-- empty line -->
+          #### What is the new behavior (if this is a feature change)?
+          <!-- empty line -->
+          <!-- empty line -->
+          Bump scraparr app version to ${APP_VERSION}
+          <!-- empty line -->
+          <!-- empty line -->
+          #### Does this PR introduce a breaking change? (What changes might users need to make in their application due to this PR?)
+          <!-- empty line -->
+          <!-- empty line -->
+          No
+          <!-- empty line -->
+          <!-- empty line -->
+          #### Other information:
+          <!-- empty line -->
+          <!-- empty line -->
+          None
+          EOF
+          gh pr create -B main -H $BRANCH --title "$title" --body-file pr-body --assignee imgios --label bump --reviewer imgios
