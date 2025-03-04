@@ -4,8 +4,6 @@
   <a href="https://github.com/imgios/scraparr/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/imgios/scraparr"></a>
 </p>
 
-# Scraparr
-
 Unofficial Helm Chart to deploy [thecfu/scraparr](https://github.com/thecfu/scraparr) app on Kubernetes.
 
 > Scraparr is a Prometheus exporter for the *arr suite (Sonarr, Radarr, Lidarr, etc.). It provides metrics that can be scraped by Prometheus to monitor and visualize the health and performance of your *arr applications.
