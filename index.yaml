@@ -2,6 +2,35 @@ apiVersion: v1
 entries:
   scraparr:
   - apiVersion: v2
+    appVersion: 2.1.0
+    created: "2025-03-06T18:49:31.420508535Z"
+    description: Scraparr is a Prometheus Exporter for various components of the *arr
+      Suite
+    digest: cf9032d82d24fe01f29a59588b930ed43e456bbfb82544aae02123339bb6e176
+    home: https://github.com/imgios/scraparr
+    keywords:
+    - arr
+    - metrics
+    - prometheus
+    - scraparr
+    - prowlarr
+    - radarr
+    - sonarr
+    - jellyseerr
+    - jellyfin
+    - flaresolverr
+    maintainers:
+    - name: Giosuè Sulipano
+      url: https://giosuesulipano.it/
+    name: scraparr
+    sources:
+    - https://github.com/imgios/scraparr
+    - https://github.com/thecfu/scraparr
+    type: application
+    urls:
+    - https://github.com/imgios/scraparr/releases/download/scraparr-1.1.1/scraparr-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v2
     appVersion: 2.0.5
     created: "2025-03-04T18:13:50.371086898Z"
     description: Scraparr is a Prometheus Exporter for various components of the *arr
@@ -175,4 +204,4 @@ entries:
     urls:
     - https://github.com/imgios/scraparr/releases/download/scraparr-1.0.0/scraparr-1.0.0.tgz
     version: 1.0.0
-generated: "2025-03-04T18:13:50.371114821Z"
+generated: "2025-03-06T18:49:31.420538711Z"
