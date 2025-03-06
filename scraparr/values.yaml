@@ -21,18 +21,63 @@ config:
   #   - url: http://sonarr.media.cluster.local:8989
   #     api_key: key123
   #     alias: sonarr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
   # -- (list) This is the radarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one radarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
   # @section -- Scraparr Configuration
   radarr: {}
   #   - url: http://radarr.media.cluster.local:7878
   #     api_key: key123
   #     alias: radarr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
   # -- (list) This is the prowlarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one prowlarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
   # @section -- Scraparr Configuration
   prowlarr: {}
   #   - url: http://prowlarr.media.cluster.local:9696
   #     api_key: key123
   #     alias: prowlarr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
+  # -- (list) This is the bazarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one bazarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  bazarr: {}
+  #   - url: http://bazarr.media.cluster.local:9696
+  #     api_key: key123
+  #     alias: bazarr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
+  # -- (list) This is the readarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one readarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  readarr: {}
+  #   - url: http://readarr.media.cluster.local:9696
+  #     api_key: key123
+  #     alias: readarr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
+  # -- (list) This is the jellyseerr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one jellyseerr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  jellyseerr: {}
+  #   - url: http://jellyseerr.media.cluster.local:9696
+  #     api_key: key123
+  #     alias: jellyseerr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
+  # -- (list) This is the overseerr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one overseerr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  overseerr: {}
+  #   - url: http://overseerr.media.cluster.local:9696
+  #     api_key: key123
+  #     alias: overseerr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
 
 # -- (string) This is the number of Scraparr deployment replicas.
 # @default -- `1`
