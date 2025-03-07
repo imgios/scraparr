@@ -29,10 +29,10 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if and .Values.config (or .Values.config.radarr .Values.config.sonarr .Values.config.prowlarr) }}
+      {{- if and .Values.config (or .Values.config.radarr .Values.config.sonarr .Values.config.prowlarr .Values.config.bazarr .Values.config.readarr .Values.config.jellyseerr .Values.config.overseerr) }}
       initContainers:
       {{- range $key, $values := $.Values.config }}
-      {{- if regexMatch "radarr|sonarr|prowlarr$" $key }}
+      {{- if regexMatch "radarr|sonarr|prowlarr|bazarr|readarr|jellyseerr|overseerr$" $key }}
       {{- $arrInfo := get $.Values.config $key }}
       {{- if kindIs "slice" $arrInfo }}
       {{- range $service := $values }}
