@@ -1,4 +1,4 @@
-![Version: 1.2.2](https://img.shields.io/badge/Version-1.2.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.0](https://img.shields.io/badge/AppVersion-2.2.0-informational?style=flat-square) 
+![Version: 1.2.3](https://img.shields.io/badge/Version-1.2.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 2.2.0](https://img.shields.io/badge/AppVersion-2.2.0-informational?style=flat-square) 
 
 # scraparr
 
@@ -34,12 +34,14 @@ Scraparr is a Prometheus Exporter for various components of the *arr Suite
 | config.auth.password | string | `s3cr3t1Gu3ss` | Insert the Scraparr password to be configured if opt for the basic authentication. |
 | config.auth.username | string | `scraparr` | Insert the Scraparr username to be configured if opt for the basic authentication. |
 | config.bazarr | list | `{}` | This is the bazarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one bazarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
+| config.jellyfin | list | `{}` | This is the jellyfin instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one jellyfin instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.jellyseerr | list | `{}` | This is the jellyseerr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one jellyseerr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.overseerr | list | `{}` | This is the overseerr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one overseerr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.prowlarr | list | `{}` | This is the prowlarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one prowlarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.radarr | list | `{}` | This is the radarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one radarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.readarr | list | `{}` | This is the readarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one readarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.sonarr | list | `{}` | This is the sonarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one sonarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
+| config.whisparr | list | `{}` | This is the whisparr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one whisparr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 
 ### Chart Configuration
 

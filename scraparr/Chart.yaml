@@ -2,7 +2,7 @@ apiVersion: v2
 name: scraparr
 description: Scraparr is a Prometheus Exporter for various components of the *arr Suite
 type: application
-version: 1.2.2
+version: 1.2.3
 appVersion: "2.2.0"
 keywords:
   - arr
@@ -15,6 +15,7 @@ keywords:
   - jellyseerr
   - jellyfin
   - flaresolverr
+  - whisparr
 home: https://github.com/imgios/scraparr
 sources:
   - https://github.com/imgios/scraparr
