@@ -89,7 +89,7 @@ config:
   # -- (list) This is the jellyfin instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one jellyfin instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
   # @section -- Scraparr Configuration
   jellyfin: {}
-    # - url: http://jellyfin:8096
+    # - url: http://jellyfin.media.cluster.local:8096
     #   api_key: key123
     #   alias: jellyfin
     #   interval: 30
