@@ -1,7 +1,7 @@
 <p>
-  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/imgios/scraparr">
-  <img alt="GitHub License" src="https://img.shields.io/github/license/imgios/scraparr">
-  <a href="https://github.com/imgios/scraparr/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/imgios/scraparr"></a>
+  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/imgios/scraparr" hspace="6px" vspace="2px">
+  <img alt="GitHub License" src="https://img.shields.io/github/license/imgios/scraparr" vspace="2px">
+  <a href="https://github.com/imgios/scraparr/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/imgios/scraparr" hspace="6px" vspace="2px"></a>
 </p>
 
 # Scraparr
