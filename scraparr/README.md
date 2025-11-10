@@ -58,6 +58,19 @@ Scraparr is a Prometheus Exporter for various components of the *arr Suite
 | ingress.tls | string | `[]` | Ingress certificates for secure protocols (e.g., HTTPS) |
 | nodeSelector | string | `{}` | This parameter is useful to deploy Scraparr only on a given set of nodes. |
 | replicaCount | string | `1` | This is the number of Scraparr deployment replicas. |
+| service.annotations | object | `{}` | Service annotations |
+| service.port | int | `7100` | Service port |
+| service.type | string | `ClusterIP` | Service type (ClusterIP, NodePort, LoadBalancer) |
+| serviceMonitor.annotations | object | `{}` | ServiceMonitor annotations |
+| serviceMonitor.basicAuth | object | `{}` | Basic auth configuration for scraping |
+| serviceMonitor.enabled | bool | `false` | Enable ServiceMonitor for Prometheus Operator |
+| serviceMonitor.interval | string | `30s` | Prometheus scrape interval |
+| serviceMonitor.labels | object | `{}` | Additional labels for the ServiceMonitor |
+| serviceMonitor.metricRelabelings | list | `[]` | Prometheus metric relabel configs |
+| serviceMonitor.path | string | `/metrics` | Metrics path |
+| serviceMonitor.relabelings | list | `[]` | Prometheus relabel configs |
+| serviceMonitor.scrapeTimeout | string | `10s` | Prometheus scrape timeout |
+| serviceMonitor.targetLabels | string | `[]` | Target labels (comma separated) |
 
 
 ----------------------------------------------
