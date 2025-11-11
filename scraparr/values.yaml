@@ -137,10 +137,60 @@ securityContext: {}
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
   # runAsUser: 1000
-# @ignore
 service:
+  # -- (string) Service type (ClusterIP, NodePort, LoadBalancer)
+  # @default -- `ClusterIP`
+  # @section -- Chart Configuration
   type: ClusterIP
+  # -- (int) Service port
+  # @default -- `7100`
+  # @section -- Chart Configuration
   port: 7100
+  # -- (object) Service annotations
+  # @section -- Chart Configuration
+  annotations: {}
+
+serviceMonitor:
+  # -- (bool) Enable ServiceMonitor for Prometheus Operator
+  # @default -- `false`
+  # @section -- Chart Configuration
+  enabled: false
+  # -- (object) Additional labels for the ServiceMonitor
+  # @section -- Chart Configuration
+  labels: {}
+  # -- (object) ServiceMonitor annotations
+  # @section -- Chart Configuration
+  annotations: {}
+  # -- (string) Prometheus scrape interval
+  # @default -- `30s`
+  # @section -- Chart Configuration
+  interval: 30s
+  # -- (string) Prometheus scrape timeout
+  # @default -- `10s`
+  # @section -- Chart Configuration
+  scrapeTimeout: 10s
+  # -- (string) Metrics path
+  # @default -- `/metrics`
+  # @section -- Chart Configuration
+  path: /metrics
+  # -- (list) Prometheus relabel configs
+  # @section -- Chart Configuration
+  relabelings: []
+  # -- (list) Prometheus metric relabel configs
+  # @section -- Chart Configuration
+  metricRelabelings: []
+  # -- (string) Target labels (comma separated)
+  # @section -- Chart Configuration
+  targetLabels: []
+  # -- (object) Basic auth configuration for scraping
+  # @section -- Chart Configuration
+  basicAuth: {}
+    # username:
+    #   name: scraparr-basic-auth
+    #   key: username
+    # password:
+    #   name: scraparr-basic-auth
+    #   key: password
 
 ingress:
   # -- (string) Enable scraparr ingress to reach it out via FQDN. This may be necessary in some circumstances.
