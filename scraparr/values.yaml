@@ -24,6 +24,7 @@ config:
   #     api_version: v3
   #     interval: 30
   #     detailed: true
+  #     episode_quality_stats: true  # Fetch episode quality metrics (N extra API calls, disable for performance)
   # -- (list) This is the radarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one radarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
   # @section -- Scraparr Configuration
   radarr: {}
@@ -84,6 +85,7 @@ config:
     #   api_version: v3
     #   interval: 30
     #   detailed: true
+    #   episode_quality_stats: true  # Fetch episode quality metrics (N extra API calls, disable for performance)
   # -- (list) This is the jellyfin instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one jellyfin instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
   # @section -- Scraparr Configuration
   jellyfin: {}
