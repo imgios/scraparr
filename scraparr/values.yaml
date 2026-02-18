@@ -95,6 +95,14 @@ config:
     #   interval: 30
     #   within: 30
     #   detailed: true
+  # -- (list) This is the Kavita instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one Kavita instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Scraparr Configuration
+  kavita: {}
+    # - url: http://kavita.media.cluster.local:5000
+    #   api_key key123
+    #   alias: kavita
+    #   interval: 30
+    #   detailed: true
 
 # -- (string) This is the number of Scraparr deployment replicas.
 # @default -- `1`
