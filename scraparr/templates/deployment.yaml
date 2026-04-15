@@ -74,6 +74,33 @@ spec:
           readinessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- $apiKeyEnvVars := list -}}
+          {{- range $service, $instances := .Values.config -}}
+            {{- if kindIs "slice" $instances -}}
+              {{- range $instance := $instances -}}
+                {{- if and $instance.api_key (kindIs "map" $instance.api_key) (eq $instance.api_key.type "ref") -}}
+                  {{- $apiKeyEnvVars = append $apiKeyEnvVars (dict "name" $instance.api_key.name "valueFrom" $instance.api_key.valueFrom) -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if or .Values.env .Values.extraEnv $apiKeyEnvVars }}
+          env:
+            {{- range $key, $value := .Values.env }}
+            - name: {{ $key | quote }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- if $apiKeyEnvVars }}
+              {{- $apiKeyEnvVars | toYaml | nindent 12 }}
+            {{- end }}
+            {{- with .Values.extraEnv }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
+          {{- end }}
+          {{- with .Values.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

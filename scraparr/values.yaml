@@ -4,6 +4,24 @@
 config:
   # general:
   #   path: /metrics
+  #
+  # api_key can be specified in three ways for any service instance:
+  #   1. Plain string (backward compatible):
+  #      api_key: key123
+  #   2. Structured literal:
+  #      api_key:
+  #        type: literal
+  #        value: key123
+  #   3. Reference to a Kubernetes Secret or ConfigMap (keeps secrets out of the ConfigMap):
+  #      api_key:
+  #        type: ref
+  #        name: SONARR_API_KEY        # env var name injected into the pod
+  #        valueFrom:
+  #          secretKeyRef:             # or configMapKeyRef
+  #            name: my-secret
+  #            key: sonarr_api_key
+  #      The chart injects the env var and writes ${SONARR_API_KEY} in the config file.
+  #      Requires scraparr to support env var interpolation in its config.
   auth:
     # -- (string) Insert the Scraparr username to be configured if opt for the basic authentication.
     # @default -- `scraparr`
@@ -283,3 +301,33 @@ nodeSelector: {}
 tolerations: []
 # @ignore
 affinity: {}
+
+# -- (map) Environment variables as plain key/value pairs injected into the Scraparr container.
+# Useful for non-sensitive configuration. For secrets, prefer `extraEnv` with `valueFrom` or `envFrom`.
+# @section -- Chart Configuration
+# @default -- `{}`
+env: {}
+# MY_VAR: my-value
+
+# -- (list) Additional environment variables in full Kubernetes `env` spec format.
+# Supports `value`, `valueFrom.secretKeyRef`, and `valueFrom.configMapKeyRef`.
+# @section -- Chart Configuration
+extraEnv: []
+# - name: SCRAPARR_API_KEY
+#   valueFrom:
+#     secretKeyRef:
+#       name: scraparr-secrets
+#       key: api_key
+# - name: SCRAPARR_TOKEN
+#   valueFrom:
+#     configMapKeyRef:
+#       name: scraparr-config-extra
+#       key: token
+
+# -- (list) Inject all keys from a Secret or ConfigMap as environment variables via `envFrom`.
+# @section -- Chart Configuration
+envFrom: []
+# - secretRef:
+#     name: scraparr-secrets
+# - configMapRef:
+#     name: scraparr-extra-config
