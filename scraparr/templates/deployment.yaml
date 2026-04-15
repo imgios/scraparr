@@ -84,22 +84,9 @@ spec:
               {{- end -}}
             {{- end -}}
           {{- end -}}
-          {{- if or .Values.env .Values.extraEnv $apiKeyEnvVars }}
+          {{- if $apiKeyEnvVars }}
           env:
-            {{- range $key, $value := .Values.env }}
-            - name: {{ $key | quote }}
-              value: {{ $value | quote }}
-            {{- end }}
-            {{- if $apiKeyEnvVars }}
-              {{- $apiKeyEnvVars | toYaml | nindent 12 }}
-            {{- end }}
-            {{- with .Values.extraEnv }}
-              {{- toYaml . | nindent 12 }}
-            {{- end }}
-          {{- end }}
-          {{- with .Values.envFrom }}
-          envFrom:
-            {{- toYaml . | nindent 12 }}
+            {{- $apiKeyEnvVars | toYaml | nindent 12 }}
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

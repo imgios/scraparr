@@ -302,32 +302,4 @@ tolerations: []
 # @ignore
 affinity: {}
 
-# -- (map) Environment variables as plain key/value pairs injected into the Scraparr container.
-# Useful for non-sensitive configuration. For secrets, prefer `extraEnv` with `valueFrom` or `envFrom`.
-# @section -- Chart Configuration
-# @default -- `{}`
-env: {}
-# MY_VAR: my-value
 
-# -- (list) Additional environment variables in full Kubernetes `env` spec format.
-# Supports `value`, `valueFrom.secretKeyRef`, and `valueFrom.configMapKeyRef`.
-# @section -- Chart Configuration
-extraEnv: []
-# - name: SCRAPARR_API_KEY
-#   valueFrom:
-#     secretKeyRef:
-#       name: scraparr-secrets
-#       key: api_key
-# - name: SCRAPARR_TOKEN
-#   valueFrom:
-#     configMapKeyRef:
-#       name: scraparr-config-extra
-#       key: token
-
-# -- (list) Inject all keys from a Secret or ConfigMap as environment variables via `envFrom`.
-# @section -- Chart Configuration
-envFrom: []
-# - secretRef:
-#     name: scraparr-secrets
-# - configMapRef:
-#     name: scraparr-extra-config
