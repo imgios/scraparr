@@ -301,5 +301,3 @@ nodeSelector: {}
 tolerations: []
 # @ignore
 affinity: {}
-
-
