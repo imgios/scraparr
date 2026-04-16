@@ -4,6 +4,24 @@
 config:
   # general:
   #   path: /metrics
+  #
+  # api_key can be specified in three ways for any service instance:
+  #   1. Plain string (backward compatible):
+  #      api_key: key123
+  #   2. Structured literal:
+  #      api_key:
+  #        type: literal
+  #        value: key123
+  #   3. Reference to a Kubernetes Secret or ConfigMap (keeps secrets out of the ConfigMap):
+  #      api_key:
+  #        type: ref
+  #        name: SONARR_API_KEY        # env var name injected into the pod
+  #        valueFrom:
+  #          secretKeyRef:             # or configMapKeyRef
+  #            name: my-secret
+  #            key: sonarr_api_key
+  #      The chart injects the env var and writes ${SONARR_API_KEY} in the config file.
+  #      Requires scraparr to support env var interpolation in its config.
   auth:
     # -- (string) Insert the Scraparr username to be configured if opt for the basic authentication.
     # @default -- `scraparr`
@@ -283,3 +301,5 @@ nodeSelector: {}
 tolerations: []
 # @ignore
 affinity: {}
+
+

@@ -4,4 +4,4 @@ metadata:
   name: scraparr-config
 data:
   config.yaml: |-
-  {{- .Values.config | toYaml | nindent 4 }}
+  {{- include "scraparr.processConfig" .Values.config | nindent 4 }}
