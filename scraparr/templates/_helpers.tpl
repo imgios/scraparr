@@ -60,3 +60,37 @@ Scraparr metrics endpoint
 {{- printf "/metrics" }}
 {{- end }}
 {{- end }}
+
+{{/*
+Process the scraparr config, transforming structured api_key objects:
+  - type "literal": replaced with the plain string value (api_key.value)
+  - type "ref":     replaced with ${api_key.name} for env var interpolation
+  - plain string:   passed through unchanged (backward compatible)
+*/}}
+{{- define "scraparr.processConfig" -}}
+{{- $result := dict -}}
+{{- range $service, $instances := . -}}
+  {{- if kindIs "slice" $instances -}}
+    {{- $newInstances := list -}}
+    {{- range $instance := $instances -}}
+      {{- $newInstance := dict -}}
+      {{- range $k, $v := $instance -}}
+        {{- if and (eq $k "api_key") (kindIs "map" $v) -}}
+          {{- if eq $v.type "literal" -}}
+            {{- $newInstance = set $newInstance "api_key" $v.value -}}
+          {{- else if eq $v.type "ref" -}}
+            {{- $newInstance = set $newInstance "api_key" (printf "${%s}" $v.name) -}}
+          {{- end -}}
+        {{- else -}}
+          {{- $newInstance = set $newInstance $k $v -}}
+        {{- end -}}
+      {{- end -}}
+      {{- $newInstances = append $newInstances $newInstance -}}
+    {{- end -}}
+    {{- $result = set $result $service $newInstances -}}
+  {{- else -}}
+    {{- $result = set $result $service $instances -}}
+  {{- end -}}
+{{- end -}}
+{{- $result | toYaml -}}
+{{- end }}

@@ -29,10 +29,10 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if and .Values.config (or .Values.config.radarr .Values.config.sonarr .Values.config.prowlarr .Values.config.bazarr .Values.config.readarr .Values.config.jellyseerr .Values.config.overseerr) }}
+      {{- if and .Values.config (or .Values.config.radarr .Values.config.sonarr .Values.config.prowlarr .Values.config.bazarr .Values.config.readarr .Values.config.lidarr .Values.config.jellyseerr .Values.config.overseerr) }}
       initContainers:
       {{- range $key, $values := $.Values.config }}
-      {{- if regexMatch "radarr|sonarr|prowlarr|bazarr|readarr|jellyseerr|overseerr$" $key }}
+      {{- if regexMatch "radarr|sonarr|prowlarr|bazarr|readarr|lidarr|jellyseerr|overseerr$" $key }}
       {{- $arrInfo := get $.Values.config $key }}
       {{- if kindIs "slice" $arrInfo }}
       {{- range $service := $values }}
@@ -73,6 +73,20 @@ spec:
           {{- with .Values.readinessProbe  }}
           readinessProbe:
             {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- $apiKeyEnvVars := list -}}
+          {{- range $service, $instances := .Values.config -}}
+            {{- if kindIs "slice" $instances -}}
+              {{- range $instance := $instances -}}
+                {{- if and $instance.api_key (kindIs "map" $instance.api_key) (eq $instance.api_key.type "ref") -}}
+                  {{- $apiKeyEnvVars = append $apiKeyEnvVars (dict "name" $instance.api_key.name "valueFrom" $instance.api_key.valueFrom) -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
+          {{- end -}}
+          {{- if $apiKeyEnvVars }}
+          env:
+            {{- $apiKeyEnvVars | toYaml | nindent 12 }}
           {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
