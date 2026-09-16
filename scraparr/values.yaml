@@ -130,6 +130,15 @@ config:
     #   alias: kavita
     #   interval: 30
     #   detailed: true
+  # -- (list) This is the sportarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one sportarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info.
+  # @section -- Sportarr Configuration
+  sportarr: {}
+  #   - url: http://sportarr.media.cluster.local:8989
+  #     api_key: key123
+  #     alias: sportarr
+  #     api_version: v3
+  #     interval: 30
+  #     detailed: true
 
 # -- (string) This is the number of Scraparr deployment replicas.
 # @default -- `1`

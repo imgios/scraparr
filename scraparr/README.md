@@ -1,4 +1,4 @@
-![Version: 1.4.1](https://img.shields.io/badge/Version-1.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.1.0](https://img.shields.io/badge/AppVersion-3.1.0-informational?style=flat-square) 
+![Version: 1.4.1](https://img.shields.io/badge/Version-1.4.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 3.2.0](https://img.shields.io/badge/AppVersion-3.2.0-informational?style=flat-square) 
 
 # scraparr
 
@@ -44,6 +44,12 @@ Scraparr is a Prometheus Exporter for various components of the *arr Suite
 | config.readarr | list | `{}` | This is the readarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one readarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.sonarr | list | `{}` | This is the sonarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one sonarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 | config.whisparr | list | `{}` | This is the whisparr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one whisparr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
+
+### Sportarr Configuration
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| config.sportarr | list | `{}` | This is the sportarr instances list. You have to define URL, API KEY and alias for each entry. The alias is mandatory if configuring more than one sportarr instance. See [thecfu's scraparr repository](https://github.com/thecfu/scraparr) for more info. |
 
 ### Chart Configuration
 
